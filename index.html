@@ -1,0 +1,1223 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Extracted DSP Lab Codes</title>
+<style>
+body{margin:0;background:#0f172a;color:#e5e7eb;font-family:Arial,Helvetica,sans-serif}
+header{text-align:center;padding:34px 16px 10px}
+h1{margin:0;font-size:34px} p{color:#9ca3af}
+main{max-width:1150px;margin:0 auto 60px;padding:0 12px}
+.card{background:#111827;border:1px solid #334155;border-radius:18px;margin:24px 0;overflow:hidden;box-shadow:0 12px 30px #0006}
+.top{display:flex;justify-content:space-between;align-items:center;gap:14px;background:#1f2937;padding:18px;border-bottom:1px solid #334155}
+h2{margin:0;font-size:22px}
+button{min-width:170px;border:0;border-radius:14px;padding:15px 22px;font-size:18px;font-weight:700;cursor:pointer;background:#22c55e;color:#052e16}
+button:hover{background:#16a34a}
+pre{margin:0;padding:24px;background:#020617;overflow:auto;white-space:pre}
+code{font-family:Consolas,Monaco,"Courier New",monospace;font-size:16px;line-height:1.65;color:#f8fafc}
+@media(max-width:700px){.top{flex-direction:column;align-items:stretch}button{width:100%}h1{font-size:26px}}
+</style>
+</head>
+<body>
+<header>
+<h1>Extracted DSP Lab Codes</h1>
+<p>Each section has a large copy button for easy copying.</p>
+<div style="margin-top: 20px;">
+  <input type="text" id="searchInput" placeholder="ابحث عن كلمة..." style="width: 100%; max-width: 400px; padding: 10px; border-radius: 8px; border: 1px solid #334155; background: #1f2937; color: #e5e7eb; font-size: 16px;">
+</div>
+</header>
+<main>
+
+<section class="card">
+  <div class="top">
+    <h2>DSP Lab 1 — Delta Sequence</h2>
+    <button onclick="copyCode('code1', this)">Copy code</button>
+  </div>
+  <pre><code id="code1">n = -30:30; % specify index n
+delta = (n == 0); % define the delta sequence
+
+stem(n, delta, &#x27;filled&#x27;);
+grid;
+title(&#x27;Delta Sequence [n]&#x27;);
+xlabel(&#x27;n&#x27;);
+ylabel(&#x27;Amplitude&#x27;);</code></pre>
+</section>
+
+<section class="card">
+  <div class="top">
+    <h2>DSP Lab 1 — Unit-Step Sequence</h2>
+    <button onclick="copyCode('code2', this)">Copy code</button>
+  </div>
+  <pre><code id="code2">n = -30:30; % specify index n
+u_step = (n &gt;= 0); % define unit-step sequence
+
+stem(n, u_step, &#x27;filled&#x27;);
+grid;
+title(&#x27;Unit-Step Sequence u[n]&#x27;);
+xlabel(&#x27;n&#x27;);
+ylabel(&#x27;Amplitude&#x27;);</code></pre>
+</section>
+
+<section class="card">
+  <div class="top">
+    <h2>DSP Lab 1 — Delta Sequence Combination</h2>
+    <button onclick="copyCode('code3', this)">Copy code</button>
+  </div>
+  <pre><code id="code3">n = -30:30;
+xn = 2*(n==0) + 3*(n==1) - 5*(n==3);
+
+stem(n, xn, &#x27;filled&#x27;);
+grid;
+title(&#x27;Discrete-Time Signal x[n]&#x27;);
+xlabel(&#x27;n&#x27;);
+ylabel(&#x27;Amplitude&#x27;);</code></pre>
+</section>
+
+<section class="card">
+  <div class="top">
+    <h2>DSP Lab 1 — Ramp Sequence</h2>
+    <button onclick="copyCode('code4', this)">Copy code</button>
+  </div>
+  <pre><code id="code4">n = -10:10;
+ramp = n .* (n &gt;= 0);
+
+stem(n, ramp, &#x27;filled&#x27;);
+grid;
+title(&#x27;Ramp Sequence r[n]&#x27;);
+xlabel(&#x27;n&#x27;);
+ylabel(&#x27;Amplitude&#x27;);</code></pre>
+</section>
+
+<section class="card">
+  <div class="top">
+    <h2>DSP Lab 1 — Shifted Ramp r[n-5]</h2>
+    <button onclick="copyCode('code5', this)">Copy code</button>
+  </div>
+  <pre><code id="code5">n = -10:15;
+x = (n - 5) .* ((n - 5) &gt;= 0);
+
+stem(n, x, &#x27;filled&#x27;);
+grid;
+title(&#x27;Shifted Ramp Sequence r[n-5]&#x27;);
+xlabel(&#x27;n&#x27;);
+ylabel(&#x27;Amplitude&#x27;);</code></pre>
+</section>
+
+<section class="card">
+  <div class="top">
+    <h2>DSP Lab 1 — Exponential Sequence</h2>
+    <button onclick="copyCode('code6', this)">Copy code</button>
+  </div>
+  <pre><code id="code6">n = -30:30;
+x = (0.8).^n .* (n &gt;= 0);
+
+stem(n, x, &#x27;filled&#x27;);
+grid;
+title(&#x27;Exponential Sequence&#x27;);
+xlabel(&#x27;n&#x27;);
+ylabel(&#x27;Amplitude&#x27;);</code></pre>
+</section>
+
+<section class="card">
+  <div class="top">
+    <h2>DSP Lab 1 — Periodic Signal</h2>
+    <button onclick="copyCode('code7', this)">Copy code</button>
+  </div>
+  <pre><code id="code7">x = [1 1 0 0 -1 -1];
+N = 4;
+
+xp = repmat(x, 1, N);
+n = 0:length(xp)-1;
+
+stem(n, xp, &#x27;filled&#x27;);
+grid;
+title(&#x27;Periodic Signal&#x27;);
+xlabel(&#x27;n&#x27;);
+ylabel(&#x27;Amplitude&#x27;);</code></pre>
+</section>
+
+<section class="card">
+  <div class="top">
+    <h2>DSP Lab 1 — Square and Sawtooth Waves</h2>
+    <button onclick="copyCode('code8', this)">Copy code</button>
+  </div>
+  <pre><code id="code8">t = 0:0.001:1; % time base
+
+x = square(2*pi*5*t); % square wave
+
+subplot(2,1,1);
+plot(t, x, &#x27;LineWidth&#x27;, 2);
+grid;
+axis([0 1 -1.2 1.2]);
+title(&#x27;Square Wave&#x27;);
+ylabel(&#x27;Amplitude&#x27;);
+
+z = sawtooth(2*pi*5*t); % sawtooth wave
+
+subplot(2,1,2);
+plot(t, z, &#x27;LineWidth&#x27;, 2);
+grid;
+axis([0 1 -1.2 1.2]);
+title(&#x27;Sawtooth Wave&#x27;);
+xlabel(&#x27;Time&#x27;);
+ylabel(&#x27;Amplitude&#x27;);</code></pre>
+</section>
+
+<section class="card">
+  <div class="top">
+    <h2>DSP Lab 1 — 50 Hz Sinusoidal Wave</h2>
+    <button onclick="copyCode('code9', this)">Copy code</button>
+  </div>
+  <pre><code id="code9">Fs = 1000; % sampling frequency
+Ts = 1/Fs; % sampling interval
+t = 0:Ts:0.1; % time vector
+
+x = sin(2*pi*50*t); % sinusoidal signal
+
+plot(t, x); % or stem(t,x)
+grid;
+xlabel(&#x27;Time (sec)&#x27;);
+ylabel(&#x27;Amplitude&#x27;);
+title(&#x27;50 Hz Sinusoidal Wave&#x27;);</code></pre>
+</section>
+
+<section class="card">
+  <div class="top">
+    <h2>DSP Lab 1 — Energy Signal</h2>
+    <button onclick="copyCode('code10', this)">Copy code</button>
+  </div>
+  <pre><code id="code10">n = 0:50; % finite approximation
+x = (0.8).^n; % signal definition
+E = sum(abs(x).^2); % energy calculation
+
+disp(&#x27;Energy of the signal:&#x27;);
+disp(E);
+
+stem(n, x, &#x27;filled&#x27;);
+grid;
+title(&#x27;Energy Signal x[n] = (0.8)^n u[n]&#x27;);
+xlabel(&#x27;n&#x27;);
+ylabel(&#x27;Amplitude&#x27;);</code></pre>
+</section>
+
+<section class="card">
+  <div class="top">
+    <h2>DSP Lab 1 — Power Signal</h2>
+    <button onclick="copyCode('code11', this)">Copy code</button>
+  </div>
+  <pre><code id="code11">n = -100:100; % large interval for approximation
+x = cos(pi*n/4); % signal definition
+P = mean(abs(x).^2); % average power
+
+disp(&#x27;Average Power of the signal:&#x27;);
+disp(P);
+
+stem(n, x, &#x27;filled&#x27;);
+grid;
+title(&#x27;Power Signal x[n] = cos(\pin/4)&#x27;);
+xlabel(&#x27;n&#x27;);
+ylabel(&#x27;Amplitude&#x27;);</code></pre>
+</section>
+
+<section class="card">
+  <div class="top">
+    <h2>DSP Lab 2 — Transfer Function using tf</h2>
+    <button onclick="copyCode('code12', this)">Copy code</button>
+  </div>
+  <pre><code id="code12">num = [1 1]; % Numerator coefficients
+den = [1 5 6]; % Denominator coefficients
+sys = tf(num, den); % Create transfer function</code></pre>
+</section>
+
+<section class="card">
+  <div class="top">
+    <h2>DSP Lab 2 — Finding Zeros, Poles, and Gain using tf2zp</h2>
+    <button onclick="copyCode('code13', this)">Copy code</button>
+  </div>
+  <pre><code id="code13">num = [1 -3 5 2];
+den = [2 5 -3 1 -2 3 -1];
+
+[z, p, k] = tf2zp(num, den);</code></pre>
+</section>
+
+<section class="card">
+  <div class="top">
+    <h2>DSP Lab 2 — Transfer Function using zpk</h2>
+    <button onclick="copyCode('code14', this)">Copy code</button>
+  </div>
+  <pre><code id="code14">zeros = [-3];
+poles = [-4 -11];
+gain = 5;
+
+sys = zpk(zeros, poles, gain);</code></pre>
+</section>
+
+<section class="card">
+  <div class="top">
+    <h2>DSP Lab 2 — Transfer Function using symbolic s</h2>
+    <button onclick="copyCode('code15', this)">Copy code</button>
+  </div>
+  <pre><code id="code15">s = tf(&#x27;s&#x27;);
+
+H = 4*s/(s^2 + 9*s + 8);
+
+Poles = pole(H)
+zeros = zero(H)</code></pre>
+</section>
+
+<section class="card">
+  <div class="top">
+    <h2>DSP Lab 2 — Step Response</h2>
+    <button onclick="copyCode('code16', this)">Copy code</button>
+  </div>
+  <pre><code id="code16">% Step response of a continuous-time LTI system
+
+num = [1 1]; % Numerator of H(s)
+den = [1 3 3]; % Denominator of H(s)
+sys = tf(num, den); % Create LTI system
+
+step(sys); % Plot step response
+grid on;</code></pre>
+</section>
+
+<section class="card">
+  <div class="top">
+    <h2>DSP Lab 2 — Impulse, Step, and lsim Response</h2>
+    <button onclick="copyCode('code17', this)">Copy code</button>
+  </div>
+  <pre><code id="code17">clear;
+close all;
+clc;
+
+num = [3 2];
+den = [2 4 5 1];
+
+sys = tf(num, den);
+t = 0:0.01:10;
+
+impulse(sys, t);
+grid on;
+title(&#x27;Impulse Response&#x27;);
+
+figure;
+step(sys, t);
+grid on;
+title(&#x27;Step Response&#x27;);
+
+u = sin(0.5 * t);
+
+figure;
+lsim(sys, u, t);
+grid on;
+title(&#x27;Response to sin(0.5t)&#x27;);
+xlabel(&#x27;Time (s)&#x27;);
+ylabel(&#x27;Amplitude&#x27;);</code></pre>
+</section>
+
+<section class="card">
+  <div class="top">
+    <h2>DSP Lab 3 — Sampling Theorem Time Domain</h2>
+    <button onclick="copyCode('code18', this)">Copy code</button>
+  </div>
+  <pre><code id="code18">clc;
+clear all;
+close all;
+
+tfinal = 0.05;
+t = 0:0.00005:tfinal;
+
+fd = input(&#x27;Enter desired analog frequency: &#x27;);
+
+% Analog Signal
+xt = sin(2*pi*fd*t);
+
+% ----------------- Under Sampling -----------------
+fs1 = 1.3*fd;
+n1 = 0:1/fs1:tfinal;
+xn1 = sin(2*pi*fd*n1);
+
+subplot(3,1,1);
+plot(t,xt,&#x27;b&#x27;,n1,xn1,&#x27;r*-&#x27;);
+title(&#x27;Under Sampling&#x27;);
+xlabel(&#x27;Time&#x27;);
+ylabel(&#x27;Amplitude&#x27;);
+legend(&#x27;Analog&#x27;,&#x27;Sampled&#x27;);
+
+% ----------------- Nyquist Sampling -----------------
+fs2 = 2*fd;
+n2 = 0:1/fs2:tfinal;
+xn2 = sin(2*pi*fd*n2);
+
+subplot(3,1,2);
+plot(t,xt,&#x27;b&#x27;,n2,xn2,&#x27;r*-&#x27;);
+title(&#x27;Nyquist Sampling&#x27;);
+xlabel(&#x27;Time&#x27;);
+ylabel(&#x27;Amplitude&#x27;);
+legend(&#x27;Analog&#x27;,&#x27;Sampled&#x27;);
+
+% ----------------- Over Sampling -----------------
+fs3 = 5*fd;
+n3 = 0:1/fs3:tfinal;
+xn3 = sin(2*pi*fd*n3);
+
+subplot(3,1,3);
+plot(t,xt,&#x27;b&#x27;,n3,xn3,&#x27;r*-&#x27;);
+title(&#x27;Over Sampling&#x27;);
+xlabel(&#x27;Time&#x27;);
+ylabel(&#x27;Amplitude&#x27;);
+legend(&#x27;Analog&#x27;,&#x27;Sampled&#x27;);</code></pre>
+</section>
+
+<section class="card">
+  <div class="top">
+    <h2>DSP Lab 3 — Sampling Theorem Frequency Domain</h2>
+    <button onclick="copyCode('code19', this)">Copy code</button>
+  </div>
+  <pre><code id="code19">clc;
+clear all;
+close all;
+
+tfinal = 0.01;
+t = 0:0.00001:tfinal;
+
+xanalog = cos(2*pi*400*t) + cos(2*pi*700*t);
+
+% ----------------- Critical Sampling -----------------
+fs = 1400;
+tsamp = 0:1/fs:13/fs;
+xsampled = cos(2*pi*400*tsamp) + cos(2*pi*700*tsamp);
+
+X = abs(fft(xsampled));
+
+subplot(6,1,1);
+stem(X);
+title(&#x27;Critical Sampling (fs = 2fm)&#x27;);
+xlabel(&#x27;Frequency Index&#x27;);
+ylabel(&#x27;Magnitude&#x27;);
+
+xrec = ifft(fft(xsampled));
+
+subplot(6,1,2);
+plot(t,xanalog,&#x27;r&#x27;,tsamp,xrec,&#x27;b*-&#x27;);
+title(&#x27;Reconstruction (Critical Sampling)&#x27;);
+legend(&#x27;Analog&#x27;,&#x27;Reconstructed&#x27;);
+
+% ----------------- Under Sampling -----------------
+fs = 700;
+tsamp = 0:1/fs:6/fs;
+xsampled = cos(2*pi*400*tsamp) + cos(2*pi*700*tsamp);
+
+X = abs(fft(xsampled));
+
+subplot(6,1,3);
+stem(X);
+title(&#x27;Under Sampling (fs &lt; 2fm)&#x27;);
+
+xrec = ifft(fft(xsampled));
+
+subplot(6,1,4);
+plot(tsamp,xrec,&#x27;b*-&#x27;);
+title(&#x27;Reconstruction (Under Sampling)&#x27;);
+
+% ----------------- Over Sampling -----------------
+fs = 2000;
+tsamp = 0:1/fs:19/fs;
+xsampled = cos(2*pi*400*tsamp) + cos(2*pi*700*tsamp);
+
+X = abs(fft(xsampled));
+
+subplot(6,1,5);
+stem(X);
+title(&#x27;Over Sampling (fs &gt; 2fm)&#x27;);
+
+xrec = ifft(fft(xsampled));
+
+subplot(6,1,6);
+plot(tsamp,xrec,&#x27;b*-&#x27;);
+title(&#x27;Reconstruction (Over Sampling)&#x27;);</code></pre>
+</section>
+
+<section class="card">
+  <div class="top">
+    <h2>DSP Lab 4 — Linear Convolution using conv</h2>
+    <button onclick="copyCode('code20', this)">Copy code</button>
+  </div>
+  <pre><code id="code20">clc;
+clear;
+close all;
+
+% Input sequences
+x = input(&#x27;Enter the input sequence x(n): &#x27;);
+h = input(&#x27;Enter the impulse response h(n): &#x27;);
+
+M = length(x);
+N = length(h);
+
+len_out = M + N - 1;
+
+n1 = 0:M-1;
+n2 = 0:N-1;
+n3 = 0:len_out-1;
+
+y = conv(x, h);
+
+fprintf(&#x27;\nLength of x(n) = %d&#x27;, M);
+fprintf(&#x27;\nLength of h(n) = %d&#x27;, N);
+fprintf(&#x27;\nLength of y(n) = %d\n&#x27;, len_out);
+
+disp(&#x27;Convolved Output y(n) = &#x27;);
+disp(y);
+
+figure;
+
+subplot(3,1,1);
+stem(n1, x, &#x27;filled&#x27;);
+grid on;
+xlabel(&#x27;n&#x27;);
+ylabel(&#x27;Amplitude&#x27;);
+title(&#x27;Input Sequence x(n)&#x27;);
+
+subplot(3,1,2);
+stem(n2, h, &#x27;filled&#x27;);
+grid on;
+xlabel(&#x27;n&#x27;);
+ylabel(&#x27;Amplitude&#x27;);
+title(&#x27;Impulse Response h(n)&#x27;);
+
+subplot(3,1,3);
+stem(n3, y, &#x27;filled&#x27;);
+grid on;
+xlabel(&#x27;n&#x27;);
+ylabel(&#x27;Amplitude&#x27;);
+title(&#x27;Output Sequence y(n) = x(n) * h(n)&#x27;);</code></pre>
+</section>
+
+<section class="card">
+  <div class="top">
+    <h2>DSP Lab 4 — Linear Convolution Starting from n ≠ 0</h2>
+    <button onclick="copyCode('code21', this)">Copy code</button>
+  </div>
+  <pre><code id="code21">clc;
+clear;
+close all;
+
+x = input(&#x27;Enter the input sequence x(n): &#x27;);
+h = input(&#x27;Enter the impulse response h(n): &#x27;);
+
+start_x = input(&#x27;Enter starting index of x(n): &#x27;);
+start_h = input(&#x27;Enter starting index of h(n): &#x27;);
+
+M = length(x);
+N = length(h);
+
+n1 = start_x : start_x + M - 1;
+n2 = start_h : start_h + N - 1;
+
+y = conv(x, h);
+
+start_y = start_x + start_h;
+len_out = M + N - 1;
+n3 = start_y : start_y + len_out - 1;
+
+disp(&#x27;Output sequence = &#x27;);
+disp(y);
+
+subplot(3,1,1);
+stem(n1, x, &#x27;filled&#x27;);
+grid on;
+title(&#x27;Input x(n)&#x27;);
+
+subplot(3,1,2);
+stem(n2, h, &#x27;filled&#x27;);
+grid on;
+title(&#x27;Impulse Response h(n)&#x27;);
+
+subplot(3,1,3);
+stem(n3, y, &#x27;filled&#x27;);
+grid on;
+title(&#x27;Output y(n)&#x27;);</code></pre>
+</section>
+
+<section class="card">
+  <div class="top">
+    <h2>DSP Lab 5 — Discrete-Time Step Response</h2>
+    <button onclick="copyCode('code22', this)">Copy code</button>
+  </div>
+  <pre><code id="code22">% Step response of a discrete-time linear system
+
+n = 0:20; % discrete-time index
+
+num = [0 4 1]; % numerator coefficients
+den = [1 -1 0.5]; % denominator coefficients
+
+y = dstep(num, den, n); % compute step response
+
+stem(n, y, &#x27;filled&#x27;)
+title(&#x27;Discrete-Time Step Response of Linear System&#x27;)
+xlabel(&#x27;Index, n&#x27;)
+ylabel(&#x27;y[n]&#x27;)
+grid on</code></pre>
+</section>
+
+<section class="card">
+  <div class="top">
+    <h2>DSP Lab 5 — Discrete-Time Impulse Response</h2>
+    <button onclick="copyCode('code23', this)">Copy code</button>
+  </div>
+  <pre><code id="code23">% Impulse response of a discrete-time linear system
+
+n = 0:20;
+
+num = [0 4 1];
+den = [1 -1 0.5];
+
+y = dimpulse(num, den, n);
+
+stem(n, y, &#x27;filled&#x27;)
+title(&#x27;Discrete-Time Impulse Response of Linear System&#x27;)
+xlabel(&#x27;Index, n&#x27;)
+ylabel(&#x27;y[n]&#x27;)
+grid on</code></pre>
+</section>
+
+<section class="card">
+  <div class="top">
+    <h2>DSP Lab 5 — Pole-Zero Plot using pzmap</h2>
+    <button onclick="copyCode('code24', this)">Copy code</button>
+  </div>
+  <pre><code id="code24">% Pole-zero plot of H(s)
+
+num = [0 1 2 3 4];
+den = [1 5 2 2 9];
+
+sys = tf(num, den);
+
+pzmap(sys)
+grid on
+
+[p, z] = pzmap(sys); % poles and zeros</code></pre>
+</section>
+
+<section class="card">
+  <div class="top">
+    <h2>DSP Lab 5 — Z-Plane Analysis</h2>
+    <button onclick="copyCode('code25', this)">Copy code</button>
+  </div>
+  <pre><code id="code25">num = [0 0 1 3 1];
+den = [1 3 7 3 9];
+
+zplane(num, den)</code></pre>
+</section>
+
+<section class="card">
+  <div class="top">
+    <h2>DSP Lab 5 — Poles and Zeros using roots</h2>
+    <button onclick="copyCode('code26', this)">Copy code</button>
+  </div>
+  <pre><code id="code26">num = [1 -0.1];
+den = [1 -0.1 -0.02];
+
+zeros = roots(num)
+poles = roots(den)
+
+zplane(num, den)</code></pre>
+</section>
+
+<section class="card">
+  <div class="top">
+    <h2>DSP Lab 5 — Stability Example</h2>
+    <button onclick="copyCode('code27', this)">Copy code</button>
+  </div>
+  <pre><code id="code27">num = [1 -1.6180 1];
+den = [1 -1.5161 0.878];
+
+roots(den)
+zplane(num, den)</code></pre>
+</section>
+
+<section class="card">
+  <div class="top">
+    <h2>DSP Lab 6 — DFT Computation</h2>
+    <button onclick="copyCode('code28', this)">Copy code</button>
+  </div>
+  <pre><code id="code28">clc;
+clear all;
+close all;
+
+% DFT computation
+x = input(&#x27;enter the input sequence&#x27;);
+N = input(&#x27;enter the value of N point DFT&#x27;);
+
+n = [0:1:N-1]
+k = [0:1:N-1]
+
+Xk = x * exp(-j*2*n&#x27;*k*pi/N)
+
+disp(&#x27;The DFT of the sequence is=&#x27;)
+disp(Xk);
+
+MagX = abs(Xk);
+PhaseX = angle(Xk)*180/pi
+
+disp(Xk);
+
+subplot(2, 1, 1);
+stem(k, MagX, &#x27;filled&#x27;);
+title(&#x27;magnitude spectrum&#x27;);
+xlabel(&#x27;k----- &gt;&#x27;);
+ylabel(&#x27;amplitude&#x27;);
+
+subplot(2, 1, 2);
+stem(k, PhaseX, &#x27;filled&#x27;);
+title(&#x27;phase spectrum&#x27;);
+xlabel(&#x27;k----- &gt;&#x27;);
+ylabel(&#x27;phase&#x27;);</code></pre>
+</section>
+
+<section class="card">
+  <div class="top">
+    <h2>DSP Lab 6 — DFT and IDFT using FFT</h2>
+    <button onclick="copyCode('code29', this)">Copy code</button>
+  </div>
+  <pre><code id="code29">% DFT and IDFT using fft
+
+clc;
+clear all;
+close all;
+
+x = input(&#x27;Enter the sequence&#x27;)
+N = length(x);
+
+y = fft(x,N)
+mag = abs(y)
+phase = angle(y)
+phase1 = phase*(180/pi);
+
+% verification
+yi = ifft(y)
+yd = real(yi)
+
+subplot(2,2,1)
+n = 0:length(x)-1;
+stem(n,x)
+title(&#x27;the values ox x&#x27;);
+
+subplot(2,2,2)
+stem(n,mag)
+title(&#x27;magnitude values of y&#x27;);
+
+subplot(2,2,3)
+stem(n,phase1)
+title(&#x27;phase values of y&#x27;);
+
+subplot(2,2,4)
+stem(n,yd)
+title(&#x27;real of ifft&#x27;)</code></pre>
+</section>
+
+<section class="card">
+  <div class="top">
+    <h2>DSP Lab 7 — Impulse Response using filter</h2>
+    <button onclick="copyCode('code30', this)">Copy code</button>
+  </div>
+  <pre><code id="code30">clc;
+close all;
+clear all;
+
+% to find impulse response
+N = input(&#x27;Enter the length of response = &#x27;);
+
+b = [-2 5/4]; % coefficients of x(n)
+a = [1 1/4 -1/8]; % coefficients of y(n)
+
+x = [1,zeros(1,N-1)]; % define the impulse signal
+n = 0:N-1;
+
+h = filter(b,a,x); % calculate the response of the system
+
+disp(&#x27;Response of filter =&#x27;);
+disp(h);
+
+subplot(2,1,1);
+stem(n,x);
+title(&#x27;Impulse input&#x27;);
+xlabel(&#x27;n&#x27;);
+ylabel(&#x27;x(n)&#x27;);
+
+subplot(2,1,2);
+stem(n,h);
+title(&#x27;Impulse response&#x27;);
+xlabel(&#x27;n&#x27;);
+ylabel(&#x27;h(n)&#x27;);</code></pre>
+</section>
+
+<section class="card">
+  <div class="top">
+    <h2>DSP Lab 7 — Step Response using filter</h2>
+    <button onclick="copyCode('code31', this)">Copy code</button>
+  </div>
+  <pre><code id="code31">N = input(&#x27;Enter the length of response = &#x27;);
+
+b = [-1 2];
+a = [1 -1/4 -3/8];
+
+x = [ones(1,N)];
+n = 0:1:N-1;
+
+h = filter(b,a,x);
+
+disp(&#x27;Response of filter =&#x27;);
+disp(h);
+
+subplot(2,1,1);
+stem(n,x);
+title(&#x27;Step input&#x27;);
+xlabel(&#x27;n&#x27;);
+ylabel(&#x27;x(n)&#x27;);
+
+subplot(2,1,2);
+stem(n,h);
+title(&#x27;Step response&#x27;);
+xlabel(&#x27;n&#x27;);
+ylabel(&#x27;h(n)&#x27;);</code></pre>
+</section>
+
+<section class="card">
+  <div class="top">
+    <h2>DSP Lab 7 — Exponential Response using filter</h2>
+    <button onclick="copyCode('code32', this)">Copy code</button>
+  </div>
+  <pre><code id="code32">N = input(&#x27;Enter the length of response = &#x27;);
+
+b = [1];
+a = [1 -5/6 1/6];
+
+n = 0:1:N-1;
+x = 2.^n;
+
+h = filter(b,a,x);
+
+disp(&#x27;Response of filter =&#x27;);
+disp(h);
+
+subplot(2,1,1);
+stem(n,x);
+title(&#x27;Exponential input&#x27;);
+xlabel(&#x27;n&#x27;);
+ylabel(&#x27;x(n)&#x27;);
+
+subplot(2,1,2);
+stem(n,h);
+title(&#x27;Exponential response&#x27;);
+xlabel(&#x27;n&#x27;);
+ylabel(&#x27;h(n)&#x27;);</code></pre>
+</section>
+
+<section class="card">
+  <div class="top">
+    <h2>DSP Lab 7 — Steady Response using filter</h2>
+    <button onclick="copyCode('code33', this)">Copy code</button>
+  </div>
+  <pre><code id="code33">N = input(&#x27;Enter the length of response = &#x27;);
+
+b = [5];
+a = [1 -0.5];
+
+n = 0:N-1;
+x = cos(0.5*pi*n); % define sinusoidal input
+
+h = filter(b,a,x);
+
+disp(&#x27;Response of filter =&#x27;);
+disp(h);
+
+subplot(2,1,1);
+stem(n,x);
+title(&#x27;Steady input&#x27;);
+xlabel(&#x27;n&#x27;);
+ylabel(&#x27;x(n)&#x27;);
+
+subplot(2,1,2);
+stem(n,h);
+title(&#x27;Steady response&#x27;);
+xlabel(&#x27;n&#x27;);
+ylabel(&#x27;h(n)&#x27;);</code></pre>
+</section>
+
+<section class="card">
+  <div class="top">
+    <h2>DSP Lab 8 — Circular Convolution using DFT and IDFT</h2>
+    <button onclick="copyCode('code34', this)">Copy code</button>
+  </div>
+  <pre><code id="code34">clc;
+clear all;
+close all;
+
+xn = input(&#x27;enter the first sequence x(n) = &#x27;);
+hn = input(&#x27;enter the second sequence h(n) = &#x27;);
+
+N = max(length(xn),length(hn));
+
+Xk = fft(xn,N);
+Hk = fft(hn,N);
+
+Yk = Xk.*Hk;
+yn = ifft(Yk,N);
+
+disp(&#x27;Circular convolution of x(n) and h(n) =&#x27;);
+disp(yn);
+
+subplot(2,2,1);
+stem(xn);
+xlabel(&#x27;n&#x27;);
+ylabel(&#x27;x(n)&#x27;);
+title(&#x27;plot of x(n)&#x27;);
+
+subplot(2,2,2);
+stem(hn);
+xlabel(&#x27;n&#x27;);
+ylabel(&#x27;h(n)&#x27;);
+title(&#x27;plot of h(n)&#x27;);
+
+subplot(2,2,3);
+stem(yn);
+xlabel(&#x27;n&#x27;);
+ylabel(&#x27;y(n)&#x27;);
+title(&#x27;Circular convolution Output&#x27;);</code></pre>
+</section>
+
+<section class="card">
+  <div class="top">
+    <h2>DSP Lab 8 — IDFT using Formula</h2>
+    <button onclick="copyCode('code35', this)">Copy code</button>
+  </div>
+  <pre><code id="code35">clc;
+clear all;
+close all;
+
+% Input frequency domain sequence
+Xk = input(&#x27;Enter frequency domain sequence X(k): &#x27;);
+
+N = length(Xk);
+
+% Index
+n = 0:N-1;
+k = 0:N-1;
+
+% IDFT computation using formula
+xn = (1/N) * (Xk * exp(j*2*pi/N * (k&#x27;*n)));
+
+% Display result
+disp(&#x27;Time domain sequence x(n) is:&#x27;);
+disp(xn);
+
+% Plot original sequence
+subplot(2,1,1);
+stem(k, abs(Xk));
+title(&#x27;Input Magnitude Spectrum X(k)&#x27;);
+xlabel(&#x27;k&#x27;);
+ylabel(&#x27;|X(k)|&#x27;);
+
+% Plot IDFT result
+subplot(2,1,2);
+stem(n, real(xn));
+title(&#x27;Recovered Time Domain Signal x(n)&#x27;);
+xlabel(&#x27;n&#x27;);
+ylabel(&#x27;Amplitude&#x27;);</code></pre>
+</section>
+
+<section class="card">
+  <div class="top">
+    <h2>DSP Lab 9 — IIR Filter Order Commands</h2>
+    <button onclick="copyCode('code36', this)">Copy code</button>
+  </div>
+  <pre><code id="code36">[N,Wc] = buttord(Wp,Ws,Rp,Rs);  % Butterworth filter
+[N,Wc] = cheb1ord(Wp,Ws,Rp,Rs); % Chebyshev Type-I
+[N,Wc] = cheb2ord(Wp,Ws,Rp,Rs); % Chebyshev Type-II
+[N,Wc] = ellipord(Wp,Ws,Rp,Rs); % Elliptic</code></pre>
+</section>
+
+<section class="card">
+  <div class="top">
+    <h2>DSP Lab 9 — IIR Filter Zeros, Poles, and Gain Commands</h2>
+    <button onclick="copyCode('code37', this)">Copy code</button>
+  </div>
+  <pre><code id="code37">[z,p,k] = butter(n,wc);
+[z,p,k] = cheby1(n,Rp,wc);
+[z,p,k] = cheby2(n,Rs,wc);
+[z,p,k] = ellip(n,Rp,Rs,wc);</code></pre>
+</section>
+
+<section class="card">
+  <div class="top">
+    <h2>DSP Lab 9 — Low Pass Butterworth Filter</h2>
+    <button onclick="copyCode('code38', this)">Copy code</button>
+  </div>
+  <pre><code id="code38">clear all;
+
+Rp = 4;   % Pass band attenuation in dB
+Rs = 30;  % Stop band attenuation in dB
+
+fp = 400; % pass band frequency in Hz
+fs = 800; % stop band frequency in Hz
+F = 2000; % Sampling frequency in Hz
+
+omp = 2*fp/F;
+oms = 2*fs/F;
+
+% To find cutoff frequency and order of the filter
+[n,wc] = buttord(omp,oms,Rp,Rs)
+
+% system function of the filter
+[b,a] = butter(n,wc)
+
+w = 0:.01:pi;
+
+[h,om] = freqz(b,a,w,&#x27;whole&#x27;);
+
+m = 20*log10(abs(h));
+an = angle(h);
+
+subplot(2,1,1);
+plot(om/pi,m);
+grid;
+
+ylabel(&#x27;Gain in dB&#x27;);
+xlabel(&#x27;Normalised frequency&#x27;);
+title(&#x27;magnitude response&#x27;);
+
+subplot(2,1,2);
+plot(om/pi,an);
+grid;
+
+ylabel(&#x27;Phase in radians&#x27;);
+xlabel(&#x27;Normalised frequency&#x27;);
+title(&#x27;phase response&#x27;);</code></pre>
+</section>
+
+<section class="card">
+  <div class="top">
+    <h2>DSP Lab 9 — High Pass Butterworth Filter</h2>
+    <button onclick="copyCode('code39', this)">Copy code</button>
+  </div>
+  <pre><code id="code39">[b,a] = butter(n,wn,&#x27;high&#x27;)
+[h,om] = freqz(b,a,w)</code></pre>
+</section>
+
+<section class="card">
+  <div class="top">
+    <h2>DSP Lab 9 — Band Pass Butterworth Filter</h2>
+    <button onclick="copyCode('code40', this)">Copy code</button>
+  </div>
+  <pre><code id="code40">% To design a Butterworth Bandpass filter for the given specifications
+
+clear all;
+
+Rp = 2;  % Passband attenuation in dB
+Rs = 20; % Stopband attenuation in dB
+
+wp = [.2*pi,.4*pi]; % passband frequency in radians
+ws = [.1*pi,.5*pi]; % stopband frequency in radians
+
+% To find cutoff frequency and order of the filter
+[n,wc] = buttord(wp/pi,ws/pi,Rp,Rs)
+
+% system function of the filter
+[b,a] = butter(n,wc)
+
+w = 0:.01:pi;
+
+[h,om] = freqz(b,a,w);
+
+m = 20*log(abs(h));
+an = angle(h);
+
+subplot(2,1,1);
+plot(om/pi,m);
+grid;
+
+ylabel(&#x27;Gain in dB&#x27;);
+xlabel(&#x27;Normalised frequency&#x27;);
+
+subplot(2,1,2);
+plot(om/pi,an);
+grid;
+
+ylabel(&#x27;Phase in radians&#x27;);
+xlabel(&#x27;Normalised frequency&#x27;);</code></pre>
+</section>
+
+<section class="card">
+  <div class="top">
+    <h2>DSP Lab 9 — Lowpass Chebyshev Filter</h2>
+    <button onclick="copyCode('code41', this)">Copy code</button>
+  </div>
+  <pre><code id="code41">% To design a chebyshev type I lowpass filter for the given specifications
+
+clear all;
+
+Rp = 1;  % Passband attenuation in dB
+Rs = 15; % Stopband attenuation in dB
+
+wp = .2*pi; % passband frequency in radians
+ws = .3*pi; % stopband frequency in radians
+
+% To find cutoff frequency and order of the filter
+[n,wn] = cheb1ord(wp/pi,ws/pi,Rp,Rs)
+
+% system function of the filter
+[b,a] = cheby1(n,Rp,wn)
+
+w = 0:.01:pi;
+
+[h,ph] = freqz(b,a,w);
+
+m = 20*log(abs(h));
+an = angle(h);
+
+subplot(2,1,1);
+plot(ph/pi,m);
+grid;
+
+ylabel(&#x27;Gain in dB&#x27;);
+xlabel(&#x27;Normalised frequency&#x27;);
+
+subplot(2,1,2);
+plot(ph/pi,an);
+grid;
+
+ylabel(&#x27;Phase in radians&#x27;);
+xlabel(&#x27;Normalised frequency&#x27;);</code></pre>
+</section>
+
+<section class="card">
+  <div class="top">
+    <h2>DSP Lab 9 — High Pass Chebyshev Filter</h2>
+    <button onclick="copyCode('code42', this)">Copy code</button>
+  </div>
+  <pre><code id="code42">clc;
+clear all;
+close all;
+
+ws = input(&#x27;enter stop band freq&#x27;);
+wp = input(&#x27;enter pass band freq&#x27;);
+
+Rp = input(&#x27;enter pass band ripple in db&#x27;);
+Rs = input(&#x27;enter stop band ripple in db&#x27;);
+
+r = input(&#x27;enter peak to peak ripple in pass band in db&#x27;);
+
+[n,wn] = cheb1ord(wp,ws,Rp,Rs);
+
+disp(n);
+disp(wn);
+
+[b,a] = cheby1(n,r,wn,&#x27;high&#x27;);
+
+disp(&#x27;numerator polynomial&#x27;);
+disp(b);
+
+disp(&#x27;denominator polynomial&#x27;);
+disp(a);
+
+w = 0:0.1:pi;
+
+[h,om] = freqz(b,a,w);
+
+m = 20*log(abs(h));
+a = angle(h);
+
+subplot(2,1,1)
+plot(om/pi,m);
+grid;
+
+title(&#x27;frequency response&#x27;)
+xlabel(&#x27;Normalized frequency&#x27;);
+ylabel(&#x27;gain in db&#x27;);
+
+subplot(2,1,2)
+plot(om/pi,a);
+grid;
+
+title(&#x27;phase response&#x27;);
+xlabel(&#x27;frequency&#x27;);
+ylabel(&#x27;phase&#x27;);</code></pre>
+</section>
+
+<section class="card">
+  <div class="top">
+    <h2>DSP Lab 9 — Band Pass Chebyshev Filter</h2>
+    <button onclick="copyCode('code43', this)">Copy code</button>
+  </div>
+  <pre><code id="code43">% To design a chebyshev type I band pass filter for the given specifications
+
+clear all;
+
+Rp = 2;  % Passband attenuation in dB
+Rs = 20; % Stopband attenuation in dB
+
+wp = [.2*pi,.4*pi]; % passband frequency in radians
+ws = [.1*pi,.5*pi]; % stopband frequency in radians
+
+% To find cutoff frequency and order of the filter
+[n,wn] = cheb1ord(wp/pi,ws/pi,Rp,Rs)
+
+% system function of the filter
+[b,a] = cheby1(n,Rp,wn)
+
+w = 0:.01:pi;
+
+[h,ph] = freqz(b,a,w);
+
+m = 20*log10(abs(h));
+an = angle(h);
+
+subplot(2,1,1);
+plot(ph/pi,m);
+grid;
+
+ylabel(&#x27;Gain in dB&#x27;);
+xlabel(&#x27;Normalised frequency&#x27;);
+
+subplot(2,1,2);
+plot(ph/pi,an);
+grid;
+
+ylabel(&#x27;Phase in radians&#x27;);
+xlabel(&#x27;Normalised frequency&#x27;);</code></pre>
+</section>
+
+</main>
+<script>
+async function copyCode(id, btn){
+  const text = document.getElementById(id).innerText;
+  try {
+    await navigator.clipboard.writeText(text);
+  } catch(e) {
+    const ta=document.createElement('textarea');
+    ta.value=text; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove();
+  }
+  const old=btn.innerText; btn.innerText='Copied!'; btn.style.background='#86efac';
+  setTimeout(()=>{btn.innerText=old; btn.style.background='';},1400);
+}
+
+// Search functionality
+document.getElementById('searchInput').addEventListener('keyup', function(e) {
+  const searchTerm = e.target.value.toLowerCase();
+  const cards = document.querySelectorAll('.card');
+  
+  cards.forEach(card => {
+    const h2Text = card.querySelector('h2').innerText.toLowerCase();
+    const codeText = card.querySelector('code').innerText.toLowerCase();
+    
+    if (h2Text.includes(searchTerm) || codeText.includes(searchTerm) || searchTerm === '') {
+      card.style.display = 'block';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+});
+</script>
+</body>
+</html>
